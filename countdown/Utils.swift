@@ -10,6 +10,8 @@ import Foundation
 import CoreData
 
 
+let imageNames:[String] = ["1","2","3","4","5"]
+
 var filePath : String {
     let manager = FileManager.default
     let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first! as URL!

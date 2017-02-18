@@ -15,11 +15,29 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventDateLabel: UILabel!
     
+    @IBOutlet weak var backgroundImage: UIImageView!
     
     func updateCell(withEvent: Event){
-        let timeUntill = withEvent.date.timeIntervalSince(Date()).days()
-        counterLabel.text = String(timeUntill)
-        counterTextLabel.text = "Days untill"
+        backgroundImage.image = UIImage(named: withEvent.imageName)
+        var interval = withEvent.date.timeIntervalSinceNow.days()
+        var currency = (interval == 1) ? "Day" : "Days"
+        if interval == 0 {
+            interval = withEvent.date.timeIntervalSinceNow.hours()
+            currency = (interval == 1) ? "Hour" : "Hours"
+
+            if interval == 0 {
+                interval = withEvent.date.timeIntervalSinceNow.minutes()
+                currency = (interval == 1) ? "Minute" : "Minutes"
+            }
+        }
+        interval = abs(interval)
+        
+        if withEvent.date > Date() {
+            counterTextLabel.text = currency + " untill"
+        } else {
+            counterTextLabel.text = currency + " since"
+        }
+        counterLabel.text = String(interval)
         eventNameLabel.text = withEvent.name
         eventDateLabel.text = withEvent.date.asString()
     }

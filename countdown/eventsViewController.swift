@@ -10,21 +10,13 @@
 import UIKit
 import CoreData
 
-class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewDataSource {
+class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate{
     
     @IBOutlet weak var table: UITableView!
 
+    @IBOutlet weak var tabBar: UITabBar!
     
-    var events: [Event] = [Event(name:"first event",
-                                    date: Date().addingTimeInterval(100000),
-                                    creationDate: Date()),
-                              Event(name:"second event",
-                                    date:Date().addingTimeInterval(200000),
-                                    creationDate: Date()),
-                              Event(name:"third event",
-                                    date:Date().addingTimeInterval(200000),
-                                    creationDate: Date())
-                            ]
+    var events: [Event] = []
 
     let cellHeight = 86
 
@@ -38,9 +30,12 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-         table.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
+        table.contentInset = UIEdgeInsetsMake(50, 0, 50, 0)
         table.tableFooterView = UIView()
-
+        
+        tabBar.selectedItem =  tabBar.items?[0]
+        tabBar.delegate = self
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,6 +68,12 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    //MARK: tabBar
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        loadEvents()
+        table.reloadData()
+    }
+    
 //MARK: helpers
     func loadEvents(){
         if let newevents =
@@ -82,10 +83,21 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
         } else {
             NSKeyedArchiver.archiveRootObject(events, toFile: filePath)
         }
+        
+        if (tabBar.selectedItem ==  tabBar.items?[0]) {
+            events = events.filter({ (Event) -> Bool in
+                return Event.date > Date()})
+            events = events.sorted(by: { $0.date < $1.date })
+            
+        } else {
+            events = events.filter({ (Event) -> Bool in
+                return Event.date < Date()})
+            events = events.sorted(by: { $0.date > $1.date })
+        }
     }
 }
 
-    
+
     
     
     
