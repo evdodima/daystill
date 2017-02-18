@@ -273,7 +273,7 @@
                                             <rect key="frame" x="176" y="14" width="22" height="22"/>
                                             <color key="tintColor" red="0.41110237729999999" green="0.73224866779999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <state key="normal">
-                                                <color key="titleColor" red="0.41110237729999999" green="0.73224866779999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="titleColor" red="0.41176470588235292" green="0.73333333333333328" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <connections>
                                                 <segue destination="uaW-Oe-p3b" kind="presentation" identifier="newEvent" id="AqR-MP-Ffd"/>
@@ -296,7 +296,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tabBar contentMode="scaleToFill" fixedFrame="YES" barStyle="black" itemPositioning="fill" translatesAutoresizingMaskIntoConstraints="NO" id="njS-AI-ZIs">
+                                        <tabBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" itemPositioning="fill" translatesAutoresizingMaskIntoConstraints="NO" id="njS-AI-ZIs">
                                             <rect key="frame" x="0.0" y="1" width="375" height="49"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -304,7 +304,9 @@
                                                 <tabBarItem title="Future events" image="Events" id="nM2-Zq-tMY"/>
                                                 <tabBarItem tag="1" title="Past events" image="Completed" id="2fE-S6-y8G"/>
                                             </items>
-                                            <color key="tintColor" red="0.40998721119999998" green="0.71310919520000005" blue="0.96673041579999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="tintColor" red="0.60564664871108853" green="0.90700982388522833" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="selectedImageTintColor" red="0.41176470588235292" green="0.73333333333333328" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </tabBar>
                                     </subviews>
                                 </view>
