@@ -7,43 +7,62 @@
 //
 
 import UIKit
+import CoreData
 
 class newEventVC: UITableViewController {
         
     let textFieldSectionIndex = 0
     let nameCellIndex = 0
-    let descCellIndex = 1
     
     let pickersDateSectionIndex = 1
     let startPickerIndex = 1
-    let endPickerIndex = 3
     let datePickerCellHeight = 216;
-
+    
+    let endLabelDefaultString = "Choose..."
 
     @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var descriptionField: UITextField!
     
     @IBOutlet weak var startLabel: UITextField!
-    @IBOutlet weak var endLabel: UITextField!
     
     @IBOutlet weak var startPicker: UIDatePicker!
-    @IBOutlet weak var endPicker: UIDatePicker!
     
     @IBAction func cancel(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-
-    func setupDatePickers(){
-        startPicker.isHidden = true
-        endPicker.isHidden = true
-        
-        startPicker.tag = 0
-        endPicker.tag = 1
-        
-        startPicker.date = Date()
-        endPicker.minimumDate = startPicker.date
+    @IBAction func save(_ sender: Any) {
+        let event = Event(name:nameField.text!,
+                          date:startPicker.date,
+                          creationDate: Date())
+        saveEvent(event: event)
     }
+    
+    @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
+        startLabel.text = sender.date.asString()
+       
+    }
+
+    @IBAction func nameEditingChanged(_ sender: Any) {
+            navigationItem.rightBarButtonItem?.isEnabled = (!nameField.text!.isEmpty)
+    }
+    func setupDatePickers(){
+        startPicker.date = Date()
+    }
+    
+    func setupLabels(){
+        startLabel.text = startPicker.date.asString()
+    }
+    
+    func saveEvent(event : Event){
+        guard var events = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [Event] else {
+            print("file not found")
+            return
+        }
+        events.append(event)
+        NSKeyedArchiver.archiveRootObject(events, toFile: filePath)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     
     
@@ -51,13 +70,12 @@ class newEventVC: UITableViewController {
         super.viewDidLoad()
         setupDatePickers()
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        setupLabels()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        hideKeyboard()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -70,8 +88,6 @@ class newEventVC: UITableViewController {
         // Set height = 0 for hidden date pickers
         if (indexPath.section == pickersDateSectionIndex && indexPath.row == startPickerIndex) {
             height = CGFloat((self.startPicker.isHidden) ? 0 : datePickerCellHeight);
-        } else if (indexPath.section == pickersDateSectionIndex && indexPath.row == endPickerIndex) {
-            height =  CGFloat((self.endPicker.isHidden ) ? 0 : datePickerCellHeight);
         }
         return height;
 
@@ -80,11 +96,10 @@ class newEventVC: UITableViewController {
     override func tableView(_: UITableView, didSelectRowAt: IndexPath) {
         tableView.deselectRow(at: didSelectRowAt, animated: true)
         
-        if ( (didSelectRowAt.row != nameCellIndex) || (didSelectRowAt.row != descCellIndex))
+        if ( (didSelectRowAt.row != nameCellIndex) )
             || (didSelectRowAt.section != textFieldSectionIndex)
         {
-            nameField.resignFirstResponder()
-            descriptionField.resignFirstResponder()
+            hideKeyboard()
         }
         
         if (didSelectRowAt.section == pickersDateSectionIndex){
@@ -92,16 +107,7 @@ class newEventVC: UITableViewController {
                 startPicker.isHidden ?
                     showCell(forDatePicker: startPicker):
                     hideCell(forDatePicker: startPicker)
-                hideCell(forDatePicker: endPicker)
             }
-            else if (didSelectRowAt.row == endPickerIndex-1){
-                endPicker.isHidden ?
-                    showCell(forDatePicker: endPicker):
-                    hideCell(forDatePicker: endPicker)
-                hideCell(forDatePicker: startPicker)
-
-            }
-            
         }
 
     }
@@ -127,8 +133,9 @@ class newEventVC: UITableViewController {
     
     func keyboardWillShow(){
         hideCell(forDatePicker: startPicker)
-        hideCell (forDatePicker: endPicker)
     }
-
-
+    
+    func hideKeyboard(){
+        nameField.resignFirstResponder()
+    }
 }
