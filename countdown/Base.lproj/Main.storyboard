@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="53" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XhC-fc-cPv">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="53" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XhC-fc-cPv">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.36858397720000002" green="0.36865249280000001" blue="0.36857965590000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.79567462205886841" green="0.8079410195350647" blue="0.80788308382034302" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -113,6 +113,7 @@
                                             <outlet property="counterTextLabel" destination="pbv-ax-alp" id="0bm-1F-X03"/>
                                             <outlet property="eventDateLabel" destination="IqX-Ey-Ek5" id="buk-W6-v3z"/>
                                             <outlet property="eventNameLabel" destination="rIc-jN-dYi" id="fTB-rH-iCR"/>
+                                            <segue destination="uaW-Oe-p3b" kind="presentation" identifier="editEvent" id="VWJ-nd-y8B"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="86" id="Pkc-Nv-a1M" customClass="EventTableViewCell" customModule="countdown">
@@ -270,7 +271,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kg-mX-Mdq">
-                                            <rect key="frame" x="176.5" y="14" width="22" height="22"/>
+                                            <rect key="frame" x="177" y="14" width="22" height="22"/>
                                             <color key="tintColor" red="0.41110237729999999" green="0.73224866779999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <state key="normal">
                                                 <color key="titleColor" red="0.41176470588235292" green="0.73333333333333328" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -345,7 +346,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RCN-kn-iGo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2157.5999999999999" y="-589.65517241379314"/>
+            <point key="canvasLocation" x="2030" y="-267"/>
         </scene>
         <!--New event-->
         <scene sceneID="9gL-EY-7Gc">
@@ -519,7 +520,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0iG-pB-uTJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4377" y="-240"/>
+            <point key="canvasLocation" x="4070" y="-267"/>
         </scene>
         <!--Image Picker View Controller-->
         <scene sceneID="Dy5-JI-3KC">
@@ -609,11 +610,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xv1-Hp-Czy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="uPy-KS-hFA" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5361" y="-241"/>
+            <point key="canvasLocation" x="5046" y="-267"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bja-if-0wh">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6cB-Kb-tqw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uaW-Oe-p3b" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SZO-2R-wIV">
@@ -629,9 +631,8 @@
                         <segue destination="ifu-pO-4cr" kind="relationship" relationship="rootViewController" id="1dS-dZ-wDx"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6cB-Kb-tqw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3295" y="-590"/>
+            <point key="canvasLocation" x="3087" y="-609"/>
         </scene>
     </scenes>
     <resources>
@@ -641,4 +642,7 @@
         <image name="Completed" width="24" height="24"/>
         <image name="Events" width="24" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="VWJ-nd-y8B"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -20,6 +20,9 @@ class newEventVC: UITableViewController {
     
     let imageCellHeight = 100
     
+    var event: Event? = nil
+    var events: [Event]? = nil
+    
     @IBOutlet weak var nameField: UITextField!
     
     @IBOutlet weak var startLabel: UITextField!
@@ -36,15 +39,28 @@ class newEventVC: UITableViewController {
     }
     
     @IBAction func save(_ sender: Any) {
-        let event = Event(name:nameField.text!,
-                          date:startPicker.date,
-                          creationDate: Date())
-        event.imageName = selectedImageName
-        saveEvent(event: event)
+        var event: Event? = nil
+        
+        if self.event != nil {
+            event = self.event
+            event!.name = nameField.text!
+            event!.date = startPicker.date
+            event!.imageName = selectedImageName
+        } else {
+            event = Event(name:nameField.text!,
+                              date:startPicker.date,
+                              creationDate: Date())
+            event!.imageName = selectedImageName
+        }
+        saveEvent(event: event!)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
         startLabel.text = sender.date.asString()
+        if self.event != nil {
+            navigationItem.rightBarButtonItem?.isEnabled = true
+        }
        
     }
 
@@ -53,26 +69,46 @@ class newEventVC: UITableViewController {
     }
     
     
-    @IBAction func unwindToEvent(segue: UIStoryboardSegue) {}
+    @IBAction func unwindToEvent(segue: UIStoryboardSegue) {
+        if self.event != nil {
+            navigationItem.rightBarButtonItem?.isEnabled = true
+        }
+    }
 
     
     
     func setupDatePickers(){
-        startPicker.date = Date()
+        if (event != nil) {
+            startPicker.date = event!.date
+        } else {
+            startPicker.date = Date()
+        }
     }
     
     func setupLabels(){
         startLabel.text = startPicker.date.asString()
+        if (event != nil) {
+            nameField.text = event?.name
+        }
+    }
+    
+    func setupImageView(){
+        if (event != nil) {
+            selectedImageName = event!.imageName
+        }
+        selectedImageView.image = UIImage(named: selectedImageName)
     }
     
     func saveEvent(event : Event){
-        guard var events = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [Event] else {
-            print("file not found")
-            return
+        
+        if self.event != nil {
+            events![events!.index(of: event)!] = event
+            
+        } else {
+            events!.append(event)
         }
-        events.append(event)
-        NSKeyedArchiver.archiveRootObject(events, toFile: filePath)
-        self.dismiss(animated: true, completion: nil)
+        NSKeyedArchiver.archiveRootObject(events!, toFile: filePath)
+        self.event = nil
     }
     
     
@@ -82,6 +118,7 @@ class newEventVC: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
         setupLabels()
+        setupImageView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

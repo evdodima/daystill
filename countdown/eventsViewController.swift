@@ -17,6 +17,7 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var tabBar: UITabBar!
     
     var events: [Event] = []
+    var allevents: [Event] = []
 
     let cellHeight = 86
 
@@ -60,6 +61,21 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? UINavigationController {
+            let editVC = dest.viewControllers.first as! newEventVC
+            editVC.events = allevents
+            if segue.identifier == "editEvent" {
+                if let dest = segue.destination as? UINavigationController {
+                     let editVC = dest.viewControllers.first as! newEventVC
+                    let event = (sender as! EventTableViewCell).event
+                    editVC.event = event
+                }
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         return CGFloat(cellHeight)
     }
@@ -70,7 +86,7 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            removeEvent(index: indexPath.row)
+            removeEvent(index: allevents.index(of:events[indexPath.row])!)
             table.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         }
     }
@@ -90,31 +106,26 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
         if let newevents =
             (NSKeyedUnarchiver.unarchiveObject(withFile: filePath)
             as? [Event]) {
-            events = newevents
+            allevents = newevents
         } else {
-            NSKeyedArchiver.archiveRootObject(events, toFile: filePath)
+            NSKeyedArchiver.archiveRootObject(allevents, toFile: filePath)
+            return
         }
         
         if (tabBar.selectedItem ==  tabBar.items?[0]) {
-            events = events.filter({ (Event) -> Bool in
+            events = allevents.filter({ (Event) -> Bool in
                 return Event.date > Date()})
             events = events.sorted(by: { $0.date < $1.date })
-            
         } else {
-            events = events.filter({ (Event) -> Bool in
+            events = allevents.filter({ (Event) -> Bool in
                 return Event.date < Date()})
             events = events.sorted(by: { $0.date > $1.date })
         }
     }
     
     func removeEvent(index:Int){
-        if var newevents =
-            (NSKeyedUnarchiver.unarchiveObject(withFile: filePath)
-                as? [Event]) {
-            newevents.remove(at: index)
-            NSKeyedArchiver.archiveRootObject(newevents, toFile: filePath)
-
-        }
+            allevents.remove(at: index)
+            NSKeyedArchiver.archiveRootObject(allevents, toFile: filePath)
         loadEvents()
     }
 }
