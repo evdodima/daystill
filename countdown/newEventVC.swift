@@ -18,14 +18,19 @@ class newEventVC: UITableViewController {
     let startPickerIndex = 1
     let datePickerCellHeight = 216;
     
-    let endLabelDefaultString = "Choose..."
-
+    let imageCellHeight = 100
+    
     @IBOutlet weak var nameField: UITextField!
     
     @IBOutlet weak var startLabel: UITextField!
     
     @IBOutlet weak var startPicker: UIDatePicker!
     
+    @IBOutlet weak var selectedImageView: UIImageView!
+    
+    var selectedImageName: String = "1"
+    
+
     @IBAction func cancel(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -34,6 +39,7 @@ class newEventVC: UITableViewController {
         let event = Event(name:nameField.text!,
                           date:startPicker.date,
                           creationDate: Date())
+        event.imageName = selectedImageName
         saveEvent(event: event)
     }
     
@@ -45,6 +51,12 @@ class newEventVC: UITableViewController {
     @IBAction func nameEditingChanged(_ sender: Any) {
             navigationItem.rightBarButtonItem?.isEnabled = (!nameField.text!.isEmpty)
     }
+    
+    
+    @IBAction func unwindToEvent(segue: UIStoryboardSegue) {}
+
+    
+    
     func setupDatePickers(){
         startPicker.date = Date()
     }
@@ -64,8 +76,6 @@ class newEventVC: UITableViewController {
     }
     
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDatePickers()
@@ -77,6 +87,10 @@ class newEventVC: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         hideKeyboard()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        selectedImageView.image = UIImage(named: selectedImageName)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -85,10 +99,15 @@ class newEventVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height = self.tableView.rowHeight;
-        // Set height = 0 for hidden date pickers
+        
         if (indexPath.section == pickersDateSectionIndex && indexPath.row == startPickerIndex) {
             height = CGFloat((self.startPicker.isHidden) ? 0 : datePickerCellHeight);
         }
+        
+        if  (indexPath.section == 2) {
+            height = CGFloat(imageCellHeight)
+        }
+        
         return height;
 
     }
@@ -121,6 +140,7 @@ class newEventVC: UITableViewController {
                        animations: { forDatePicker.alpha = 1.0}
                        )
     }
+    
     func hideCell(forDatePicker: UIDatePicker){
         forDatePicker.isHidden = true
     

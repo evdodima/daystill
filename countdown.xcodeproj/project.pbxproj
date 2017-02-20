@@ -14,6 +14,8 @@
 		8E68EEB81E4F549D0079A828 /* eventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E68EEB71E4F549D0079A828 /* eventsViewController.swift */; };
 		8E68EEBC1E505E340079A828 /* newEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E68EEBB1E505E340079A828 /* newEventVC.swift */; };
 		8E7D36DA1E57579600AF1321 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7D36D91E57579600AF1321 /* Event.swift */; };
+		8E7D36DC1E59856400AF1321 /* imageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7D36DB1E59856400AF1321 /* imageTableViewCell.swift */; };
+		8E7D36DE1E59882600AF1321 /* imagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7D36DD1E59882600AF1321 /* imagePickerViewController.swift */; };
 		8EDA79A51E5339B100664A04 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDA79A41E5339B100664A04 /* EventTableViewCell.swift */; };
 		8EDA79A71E533D1000664A04 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDA79A61E533D1000664A04 /* Utils.swift */; };
 /* End PBXBuildFile section */
@@ -28,6 +30,8 @@
 		8E68EEB71E4F549D0079A828 /* eventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = eventsViewController.swift; sourceTree = "<group>"; };
 		8E68EEBB1E505E340079A828 /* newEventVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newEventVC.swift; sourceTree = "<group>"; };
 		8E7D36D91E57579600AF1321 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		8E7D36DB1E59856400AF1321 /* imageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imageTableViewCell.swift; sourceTree = "<group>"; };
+		8E7D36DD1E59882600AF1321 /* imagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imagePickerViewController.swift; sourceTree = "<group>"; };
 		8EDA79A41E5339B100664A04 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		8EDA79A61E533D1000664A04 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,6 +76,8 @@
 				8E68EEBB1E505E340079A828 /* newEventVC.swift */,
 				8EDA79A41E5339B100664A04 /* EventTableViewCell.swift */,
 				8EDA79A61E533D1000664A04 /* Utils.swift */,
+				8E7D36DB1E59856400AF1321 /* imageTableViewCell.swift */,
+				8E7D36DD1E59882600AF1321 /* imagePickerViewController.swift */,
 			);
 			path = countdown;
 			sourceTree = "<group>";
@@ -159,6 +165,8 @@
 			files = (
 				8E68EEBC1E505E340079A828 /* newEventVC.swift in Sources */,
 				8E68EEA61E4F19840079A828 /* AppDelegate.swift in Sources */,
+				8E7D36DE1E59882600AF1321 /* imagePickerViewController.swift in Sources */,
+				8E7D36DC1E59856400AF1321 /* imageTableViewCell.swift in Sources */,
 				8EDA79A51E5339B100664A04 /* EventTableViewCell.swift in Sources */,
 				8E68EEB81E4F549D0079A828 /* eventsViewController.swift in Sources */,
 				8E7D36DA1E57579600AF1321 /* Event.swift in Sources */,

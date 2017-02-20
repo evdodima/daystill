@@ -64,6 +64,17 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
         return CGFloat(cellHeight)
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            removeEvent(index: indexPath.row)
+            table.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        }
+    }
+    
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -94,6 +105,17 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
                 return Event.date < Date()})
             events = events.sorted(by: { $0.date > $1.date })
         }
+    }
+    
+    func removeEvent(index:Int){
+        if var newevents =
+            (NSKeyedUnarchiver.unarchiveObject(withFile: filePath)
+                as? [Event]) {
+            newevents.remove(at: index)
+            NSKeyedArchiver.archiveRootObject(newevents, toFile: filePath)
+
+        }
+        loadEvents()
     }
 }
 

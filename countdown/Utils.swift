@@ -8,9 +8,10 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 
-let imageNames:[String] = ["1","2","3","4","5"]
+let imageNames:[String] = ["1","2","3","4","5","6","7"]
 
 var filePath : String {
     let manager = FileManager.default
@@ -18,6 +19,16 @@ var filePath : String {
     return (url?.appendingPathComponent("events").path)!
 }
 
+extension UIButton {
+    func setBackgroundColor(color: UIColor, forState: UIControlState) {
+        UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
+        UIGraphicsGetCurrentContext()!.setFillColor(color.cgColor)
+        UIGraphicsGetCurrentContext()!.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
+        let colorImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        self.setBackgroundImage(colorImage, for: forState)
+    }}
 extension TimeInterval {
     func days() -> Int{
         return Int(self / 86400 )
