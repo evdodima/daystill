@@ -8,14 +8,27 @@
 
 import UIKit
 
-class imagePickerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class imagePickerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    let imagePickerController: UIImagePickerController = UIImagePickerController();
+
     @IBOutlet weak var imagesTableView: UITableView!
     
+    @IBAction func addNewImage(_ sender: Any) {
+        imagePickerController.allowsEditing = false;
+        imagePickerController.delegate = self;
+        imagePickerController.sourceType = .photoLibrary;
+        present(imagePickerController, animated: true, completion: nil)
+        
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         imagesTableView.delegate = self
         imagesTableView.dataSource = self
+        
+        imagesTableView.contentInset = UIEdgeInsetsMake(0, 0, 46, 0)
+
 
         // Do any additional setup after loading the view.
     }
@@ -28,9 +41,23 @@ class imagePickerViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
+        imagesTableView.deselectRow(at: indexPath, animated: false)
         performSegue(withIdentifier: "imagePicked", sender: indexPath)
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            imageNames.remove(at: indexPath.row);
+            imagesTableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        }
+    }
+
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? newEventVC {
@@ -38,6 +65,18 @@ class imagePickerViewController: UIViewController, UITableViewDelegate, UITableV
             dest.selectedImageName = imageNames[row]
         }
     }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let cropVC = (storyboard?.instantiateViewController(withIdentifier: "imageCropper"))! as! ImageCropperVC
+        picker.dismiss(animated: false, completion: {() -> Void in
+            cropVC.pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+            self.present(cropVC,
+            animated: true,completion: nil)
+        })
+       
+    }
+    
+    
     
 //    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
 //        if let cell  = tableView.cellForRow(at: indexPath as IndexPath) as? imageTableViewCell {

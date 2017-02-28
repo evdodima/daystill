@@ -16,6 +16,7 @@
 		8E7D36DA1E57579600AF1321 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7D36D91E57579600AF1321 /* Event.swift */; };
 		8E7D36DC1E59856400AF1321 /* imageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7D36DB1E59856400AF1321 /* imageTableViewCell.swift */; };
 		8E7D36DE1E59882600AF1321 /* imagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7D36DD1E59882600AF1321 /* imagePickerViewController.swift */; };
+		8E9A68F31E64B359009AD087 /* imageCropperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9A68F21E64B359009AD087 /* imageCropperVC.swift */; };
 		8EDA79A51E5339B100664A04 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDA79A41E5339B100664A04 /* EventTableViewCell.swift */; };
 		8EDA79A71E533D1000664A04 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDA79A61E533D1000664A04 /* Utils.swift */; };
 /* End PBXBuildFile section */
@@ -32,6 +33,7 @@
 		8E7D36D91E57579600AF1321 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		8E7D36DB1E59856400AF1321 /* imageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imageTableViewCell.swift; sourceTree = "<group>"; };
 		8E7D36DD1E59882600AF1321 /* imagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imagePickerViewController.swift; sourceTree = "<group>"; };
+		8E9A68F21E64B359009AD087 /* imageCropperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imageCropperVC.swift; sourceTree = "<group>"; };
 		8EDA79A41E5339B100664A04 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		8EDA79A61E533D1000664A04 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,6 +80,7 @@
 				8EDA79A61E533D1000664A04 /* Utils.swift */,
 				8E7D36DB1E59856400AF1321 /* imageTableViewCell.swift */,
 				8E7D36DD1E59882600AF1321 /* imagePickerViewController.swift */,
+				8E9A68F21E64B359009AD087 /* imageCropperVC.swift */,
 			);
 			path = countdown;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 				8EDA79A51E5339B100664A04 /* EventTableViewCell.swift in Sources */,
 				8E68EEB81E4F549D0079A828 /* eventsViewController.swift in Sources */,
 				8E7D36DA1E57579600AF1321 /* Event.swift in Sources */,
+				8E9A68F31E64B359009AD087 /* imageCropperVC.swift in Sources */,
 				8EDA79A71E533D1000664A04 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

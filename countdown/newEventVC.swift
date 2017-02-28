@@ -83,6 +83,7 @@ class newEventVC: UITableViewController {
         } else {
             startPicker.date = Date()
         }
+        startPicker.setValue(UIColor.white, forKeyPath: "textColor")
     }
     
     func setupLabels(){

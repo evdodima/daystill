@@ -19,7 +19,7 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
     var events: [Event] = []
     var allevents: [Event] = []
 
-    let cellHeight = 86
+    let cellHeight = 100
 
 
     
@@ -38,6 +38,8 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
         tabBar.delegate = self
     
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

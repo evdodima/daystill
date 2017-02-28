@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 
-let imageNames:[String] = ["1","2","3","4","5","6","7"]
+var imageNames:[String] = ["1","2","3","4","5","6","7"]
 
 var filePath : String {
     let manager = FileManager.default
@@ -28,7 +28,8 @@ extension UIButton {
         UIGraphicsEndImageContext()
         
         self.setBackgroundImage(colorImage, for: forState)
-    }}
+    }
+}
 extension TimeInterval {
     func days() -> Int{
         return Int(self / 86400 )
@@ -42,7 +43,7 @@ extension TimeInterval {
 }
 
 extension Date {
-    func asString() -> String{
+    func asString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .short
