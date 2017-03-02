@@ -205,6 +205,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RCN-kn-iGo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="o0D-QL-QbF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1857" y="-609"/>
         </scene>
@@ -377,6 +378,7 @@
                         <outlet property="selectedImageView" destination="NoZ-45-n4Z" id="EWg-Qa-CI4"/>
                         <outlet property="startLabel" destination="sYc-4m-FUj" id="Pab-5Y-EYj"/>
                         <outlet property="startPicker" destination="33W-W7-f2Z" id="LC0-qY-mOH"/>
+                        <segue destination="o0D-QL-QbF" kind="unwind" identifier="backToEventsVC" unwindAction="unwindToEventsVCWithSegue:" id="7SC-vk-kSA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0iG-pB-uTJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -520,6 +522,6 @@
         <image name="Events" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VWJ-nd-y8B"/>
+        <segue reference="AqR-MP-Ffd"/>
     </inferredMetricsTieBreakers>
 </document>

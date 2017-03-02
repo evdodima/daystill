@@ -52,7 +52,21 @@ class newEventVC: UITableViewController {
                               creationDate: Date(), bgImage : selectedImage)
         }
         saveEvent(event: event!)
-        self.dismiss(animated: true, completion: nil)
+        self.performSegue(withIdentifier: "backToEventsVC", sender: event)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let dest = segue.destination as? eventsViewController {
+            let eventDate = (sender as! Event).date
+            
+            if eventDate.timeIntervalSinceNow > 0 {
+                dest.tabBar.selectedItem = dest.tabBar.items?[0]
+            } else {
+                dest.tabBar.selectedItem = dest.tabBar.items?[1]
+            }
+        }
+        
     }
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
@@ -67,15 +81,12 @@ class newEventVC: UITableViewController {
             navigationItem.rightBarButtonItem?.isEnabled = (!nameField.text!.isEmpty)
     }
     
-    
     @IBAction func unwindToEvent(segue: UIStoryboardSegue) {
         if self.event != nil {
             navigationItem.rightBarButtonItem?.isEnabled = true
         }
     }
 
-    
-    
     func setupDatePickers(){
         if (event != nil) {
             startPicker.date = event!.date

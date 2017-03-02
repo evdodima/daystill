@@ -39,6 +39,9 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
     
     }
     
+    @IBAction func unwindToEventsVC(segue: UIStoryboardSegue){
+    }
+    
     
 
     override func didReceiveMemoryWarning() {
@@ -120,7 +123,7 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
             events = events.sorted(by: { $0.date < $1.date })
         } else {
             events = allevents.filter({ (Event) -> Bool in
-                return Event.date < Date()})
+                return Event.date <= Date()})
             events = events.sorted(by: { $0.date > $1.date })
         }
     }
