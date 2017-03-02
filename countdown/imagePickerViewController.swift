@@ -14,6 +14,8 @@ class imagePickerViewController: UIViewController, UITableViewDelegate, UITableV
 
     @IBOutlet weak var imagesTableView: UITableView!
     
+    var pickedImage: UIImage? = nil
+    
     @IBAction func addNewImage(_ sender: Any) {
         imagePickerController.allowsEditing = false;
         imagePickerController.delegate = self;
@@ -27,36 +29,86 @@ class imagePickerViewController: UIViewController, UITableViewDelegate, UITableV
         imagesTableView.delegate = self
         imagesTableView.dataSource = self
         
-        imagesTableView.contentInset = UIEdgeInsetsMake(0, 0, 46, 0)
+        imagesTableView.contentInset = UIEdgeInsetsMake(-1, 0, 11, 0)
 
 
         // Do any additional setup after loading the view.
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return imageNames.count
+        if userImages.isEmpty {
+            return sampleImages.count
+        } else {
+            return section == 0 ? userImages.count : sampleImages.count
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return userImages.isEmpty ? 1 : 2
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         imagesTableView.deselectRow(at: indexPath, animated: false)
+        if indexPath.section == 0 && tableView.numberOfSections == 2 {
+            self.pickedImage = userImages[indexPath.row]
+        } else {
+            self.pickedImage = sampleImages[indexPath.row]
+        }
         performSegue(withIdentifier: "imagePicked", sender: indexPath)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return indexPath.row >= imageNames.count
+        return indexPath.section == 0 && tableView.numberOfSections == 2
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            imageNames.remove(at: indexPath.row);
+            userImages.remove(at: indexPath.row)
+            tableView.beginUpdates()
+            if userImages.isEmpty {
+                var indexSet = IndexSet()
+                indexSet.insert(indexPath.section)
+                tableView.deleteSections(indexSet, with: .automatic)
+            }
             imagesTableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            tableView.endUpdates()
         }
     }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if userImages.isEmpty {
+            return nil
+        }
+        return section == 0 ? "Your images" : "Sample images"
+    }
     
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        let cell:imageTableViewCell = self.imagesTableView.dequeueReusableCell(withIdentifier: "imageCell")! as! imageTableViewCell
+        
+        if indexPath.section == 0 && tableView.numberOfSections == 2 {
+            cell.update(withImage: userImages[indexPath.row])
+            
+        } else {
+            cell.update(withImage: sampleImages[indexPath.row])
+        }
+        return cell
+    }
+    
+//    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if userImages.isEmpty {
+            return 1
+        }
+        return 32
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = textColor
+    }
+//
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? newEventVC {
-            let row = (sender as! IndexPath).row
-            dest.selectedImageName = imageNames[row]
+            dest.selectedImage = pickedImage
         }
     }
     
@@ -81,8 +133,10 @@ class imagePickerViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func imageCropViewController(_ controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect) {
-        
-        
+        self.pickedImage = croppedImage
+        userImages.insert(croppedImage, at: 0)
+        performSegue(withIdentifier: "imagePicked", sender: self)
+
     }
     
     func imageCropViewControllerCustomMaskRect(_ controller: RSKImageCropViewController) -> CGRect {
@@ -110,13 +164,9 @@ class imagePickerViewController: UIViewController, UITableViewDelegate, UITableV
         return controller.maskRect
     }
     
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        
-        let cell:imageTableViewCell = self.imagesTableView.dequeueReusableCell(withIdentifier: "imageCell")! as! imageTableViewCell
-        cell.imageToPickView.image = nil
-        cell.imageToPickView.image = UIImage(named: imageNames[indexPath.row])
-        return cell
-    }
+
+    
+    
     
 
     override func didReceiveMemoryWarning() {

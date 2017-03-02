@@ -31,7 +31,7 @@ class newEventVC: UITableViewController {
     
     @IBOutlet weak var selectedImageView: UIImageView!
     
-    var selectedImageName: String = "1"
+    var selectedImage: UIImage! = sampleImages[0]
     
 
     @IBAction func cancel(_ sender: Any) {
@@ -45,12 +45,11 @@ class newEventVC: UITableViewController {
             event = self.event
             event!.name = nameField.text!
             event!.date = startPicker.date
-            event!.imageName = selectedImageName
+            event!.bgImage = selectedImage
         } else {
             event = Event(name:nameField.text!,
                               date:startPicker.date,
-                              creationDate: Date())
-            event!.imageName = selectedImageName
+                              creationDate: Date(), bgImage : selectedImage)
         }
         saveEvent(event: event!)
         self.dismiss(animated: true, completion: nil)
@@ -95,9 +94,9 @@ class newEventVC: UITableViewController {
     
     func setupImageView(){
         if (event != nil) {
-            selectedImageName = event!.imageName
+            selectedImage = event!.bgImage
         }
-        selectedImageView.image = UIImage(named: selectedImageName)
+        selectedImageView.image = selectedImage
     }
     
     func saveEvent(event : Event){
@@ -127,7 +126,7 @@ class newEventVC: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        selectedImageView.image = UIImage(named: selectedImageName)
+        selectedImageView.image = selectedImage
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

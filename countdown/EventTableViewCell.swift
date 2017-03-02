@@ -21,7 +21,7 @@ class EventTableViewCell: UITableViewCell {
     func updateCell(withEvent: Event){
         self.event = withEvent
         backgroundImage.image = nil
-        backgroundImage.image = UIImage(named: withEvent.imageName)
+        backgroundImage.image = withEvent.bgImage
         var interval = withEvent.date.timeIntervalSinceNow.days()
         var currency = (interval == 1) ? "Day" : "Days"
         if interval == 0 {

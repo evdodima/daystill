@@ -12,11 +12,32 @@ import UIKit
 
 
 var imageNames:[String] = ["1","2","3","4","5","6","7"]
+var sampleImages:[UIImage] = {
+    var result:[UIImage] = []
+    for name in imageNames {
+        result.append(UIImage(named: name)!)
+    }
+    return result
+}()
+var userImages: [UIImage] = [] {
+    didSet {
+        NSKeyedArchiver.archiveRootObject(userImages, toFile: imagesFilePath)
+    }
+}
+
+let textColor = UIColor(red:0.60, green:0.91, blue:1.00, alpha:1.0)
+
 
 var filePath : String {
     let manager = FileManager.default
     let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first! as URL!
     return (url?.appendingPathComponent("events").path)!
+}
+
+var imagesFilePath : String {
+    let manager = FileManager.default
+    let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first! as URL!
+    return (url?.appendingPathComponent("userImages").path)!
 }
 
 extension UIButton {

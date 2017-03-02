@@ -9,21 +9,9 @@
 import UIKit
 
 class imageTableViewCell: UITableViewCell {
-
     @IBOutlet weak var imageToPickView: UIImageView!
-        
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        if selected {
-            self.alpha = 0.6
-        } else {
-            self.alpha = 1.0
-        }
-        // Configure the view for the selected state
+    func update(withImage: UIImage){
+        self.imageToPickView.image = nil
+        self.imageToPickView.image = withImage
     }
 }
