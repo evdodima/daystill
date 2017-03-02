@@ -8,7 +8,7 @@
 
 import UIKit
 
-class imagePickerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class imagePickerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate,RSKImageCropViewControllerDataSource {
     
     let imagePickerController: UIImagePickerController = UIImagePickerController();
 
@@ -33,9 +33,6 @@ class imagePickerViewController: UIViewController, UITableViewDelegate, UITableV
         // Do any additional setup after loading the view.
     }
     
-    
-    
-    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return imageNames.count
     }
@@ -46,7 +43,7 @@ class imagePickerViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        return indexPath.row >= imageNames.count
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -55,9 +52,6 @@ class imagePickerViewController: UIViewController, UITableViewDelegate, UITableV
             imagesTableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         }
     }
-
-    
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? newEventVC {
@@ -67,29 +61,54 @@ class imagePickerViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let cropVC = (storyboard?.instantiateViewController(withIdentifier: "imageCropper"))! as! ImageCropperVC
-        picker.dismiss(animated: false, completion: {() -> Void in
-            cropVC.pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
-            self.present(cropVC,
-            animated: true,completion: nil)
+        let pickedImage : UIImage = (info[UIImagePickerControllerOriginalImage] as? UIImage)!
+        
+        picker.dismiss(animated: false, completion: { () -> Void in
+            
+            var imageCropVC : RSKImageCropViewController!
+            
+            imageCropVC = RSKImageCropViewController(image: pickedImage, cropMode: RSKImageCropMode.custom)
+            
+            imageCropVC.delegate = self
+            imageCropVC.dataSource = self
+            self.present(imageCropVC, animated: true, completion: nil)
+            
         })
-       
     }
     
+    func imageCropViewControllerDidCancelCrop(_ controller: RSKImageCropViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
     
+    func imageCropViewController(_ controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect) {
+        
+        
+    }
     
-//    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-//        if let cell  = tableView.cellForRow(at: indexPath as IndexPath) as? imageTableViewCell {
-//            cell.imageToPickView.alpha = 0.2
-//        }
-//    }
-//    
-//    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-//        if let cell  = tableView.cellForRow(at: indexPath as IndexPath) as? imageTableViewCell {
-//            cell.imageToPickView.alpha = 1
-//        }
-//    }
+    func imageCropViewControllerCustomMaskRect(_ controller: RSKImageCropViewController) -> CGRect {
+        var maskRect : CGRect
+        
+        let maskHeight = CGFloat(120.0)
+        
+        let viewWidth = controller.view.frame.width
+        let viewHeight = controller.view.frame.height
+        
+        maskRect = CGRect(
+            x:0,
+            y:(viewHeight-maskHeight) * 0.5,
+            width: viewWidth,
+            height: maskHeight)
+        return maskRect
+    }
     
+    func imageCropViewControllerCustomMaskPath(_ controller: RSKImageCropViewController) -> UIBezierPath {
+        let rect = controller.maskRect;
+        return UIBezierPath(rect: rect)
+    }
+    
+    func imageCropViewControllerCustomMovementRect(_ controller: RSKImageCropViewController) -> CGRect {
+        return controller.maskRect
+    }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
@@ -109,14 +128,5 @@ class imagePickerViewController: UIViewController, UITableViewDelegate, UITableV
     @IBAction func backButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

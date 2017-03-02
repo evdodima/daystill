@@ -19,9 +19,12 @@
 		8E9A68F31E64B359009AD087 /* imageCropperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9A68F21E64B359009AD087 /* imageCropperVC.swift */; };
 		8EDA79A51E5339B100664A04 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDA79A41E5339B100664A04 /* EventTableViewCell.swift */; };
 		8EDA79A71E533D1000664A04 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDA79A61E533D1000664A04 /* Utils.swift */; };
+		F0340E8C003165043D81FAC6 /* Pods_countdown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE47CCCAD5768B6D30D63215 /* Pods_countdown.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8470E9CB6701078D1BF01325 /* Pods-countdown.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-countdown.debug.xcconfig"; path = "Pods/Target Support Files/Pods-countdown/Pods-countdown.debug.xcconfig"; sourceTree = "<group>"; };
+		8E33A2221E66B72700960F7F /* countdown-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "countdown-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E68EEA21E4F19840079A828 /* countdown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = countdown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E68EEA51E4F19840079A828 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E68EEAA1E4F19840079A828 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -36,6 +39,8 @@
 		8E9A68F21E64B359009AD087 /* imageCropperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imageCropperVC.swift; sourceTree = "<group>"; };
 		8EDA79A41E5339B100664A04 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		8EDA79A61E533D1000664A04 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		AE47CCCAD5768B6D30D63215 /* Pods_countdown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_countdown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF94C9B15107DC755A181A9B /* Pods-countdown.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-countdown.release.xcconfig"; path = "Pods/Target Support Files/Pods-countdown/Pods-countdown.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,17 +48,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0340E8C003165043D81FAC6 /* Pods_countdown.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		026461942422ACC0E4CD860D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AE47CCCAD5768B6D30D63215 /* Pods_countdown.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8E68EE991E4F19840079A828 = {
 			isa = PBXGroup;
 			children = (
 				8E68EEA41E4F19840079A828 /* countdown */,
 				8E68EEA31E4F19840079A828 /* Products */,
+				B2FCA83B829CEB25C21B6AD4 /* Pods */,
+				026461942422ACC0E4CD860D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,6 +97,7 @@
 				8E7D36DB1E59856400AF1321 /* imageTableViewCell.swift */,
 				8E7D36DD1E59882600AF1321 /* imagePickerViewController.swift */,
 				8E9A68F21E64B359009AD087 /* imageCropperVC.swift */,
+				8E33A2221E66B72700960F7F /* countdown-Bridging-Header.h */,
 			);
 			path = countdown;
 			sourceTree = "<group>";
@@ -93,6 +110,15 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		B2FCA83B829CEB25C21B6AD4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8470E9CB6701078D1BF01325 /* Pods-countdown.debug.xcconfig */,
+				DF94C9B15107DC755A181A9B /* Pods-countdown.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -100,9 +126,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E68EEB41E4F19840079A828 /* Build configuration list for PBXNativeTarget "countdown" */;
 			buildPhases = (
+				5BC04C8AD7CF90E3ADBAB56A /* [CP] Check Pods Manifest.lock */,
 				8E68EE9E1E4F19840079A828 /* Sources */,
 				8E68EE9F1E4F19840079A828 /* Frameworks */,
 				8E68EEA01E4F19840079A828 /* Resources */,
+				FD92BC0772EB4BF203EB131C /* [CP] Embed Pods Frameworks */,
+				B56178C93F5D79799B129431 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -126,6 +155,7 @@
 					8E68EEA11E4F19840079A828 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = FXLJ227ME9;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -160,6 +190,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5BC04C8AD7CF90E3ADBAB56A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B56178C93F5D79799B129431 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-countdown/Pods-countdown-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FD92BC0772EB4BF203EB131C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-countdown/Pods-countdown-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8E68EE9E1E4F19840079A828 /* Sources */ = {
@@ -295,14 +373,18 @@
 		};
 		8E68EEB51E4F19840079A828 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8470E9CB6701078D1BF01325 /* Pods-countdown.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = FXLJ227ME9;
 				INFOPLIST_FILE = countdown/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Evdodima.DaysTill;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "countdown/countdown-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -310,14 +392,17 @@
 		};
 		8E68EEB61E4F19840079A828 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF94C9B15107DC755A181A9B /* Pods-countdown.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = FXLJ227ME9;
 				INFOPLIST_FILE = countdown/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Evdodima.DaysTill;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "countdown/countdown-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -1,0 +1,21 @@
+PODS:
+  - RSKImageCropper (1.6.0)
+
+DEPENDENCIES:
+  - RSKImageCropper (from `https://github.com/EvdoDima/RSKImageCropper`)
+
+EXTERNAL SOURCES:
+  RSKImageCropper:
+    :git: https://github.com/EvdoDima/RSKImageCropper
+
+CHECKOUT OPTIONS:
+  RSKImageCropper:
+    :commit: c6d54cb0d55b4eb40c6caa67b4c90dd6b16f4194
+    :git: https://github.com/EvdoDima/RSKImageCropper
+
+SPEC CHECKSUMS:
+  RSKImageCropper: 6903235c7a8a79acb1e1f3490e2c911b858f8208
+
+PODFILE CHECKSUM: 65d62444aa519d12eb73fef262bf93307dfad870
+
+COCOAPODS: 1.2.0
