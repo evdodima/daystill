@@ -22,10 +22,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3" translatesAutoresizingMaskIntoConstraints="NO" id="jtN-rd-NIx">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eGN-G0-3YP">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="TY3-Ub-e5o">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="111" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XhC-fc-cPv">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.36862745098039218" green="0.36865249280000001" blue="0.36857965590000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="separatorColor" red="0.79567462205886841" green="0.8079410195350647" blue="0.80788308382034302" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="22" id="Yc2-VQ-trc">
@@ -132,9 +142,6 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kg-mX-Mdq">
                                             <rect key="frame" x="333" y="14" width="22" height="22"/>
                                             <color key="tintColor" red="0.41110237729999999" green="0.73224866779999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <state key="normal">
-                                                <color key="titleColor" red="0.41176470588235292" green="0.73333333333333328" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </state>
                                             <connections>
                                                 <segue destination="uaW-Oe-p3b" kind="presentation" identifier="newEvent" id="AqR-MP-Ffd"/>
                                             </connections>
@@ -176,17 +183,55 @@
                                 </constraints>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-VD-5Vh">
+                                <rect key="frame" x="106" y="260.5" width="163.5" height="148"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Tap ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.97636479139328003" green="0.97653168439865112" blue="0.97635418176651001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="36" name="Avenir-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="+">
+                                        <attributes>
+                                            <color key="NSColor" red="0.38003557920455933" green="0.65476536750793457" blue="0.88346213102340698" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="36" name="Avenir-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" to add  new event">
+                                        <attributes>
+                                            <color key="NSColor" red="0.97636479139328003" green="0.97653168439865112" blue="0.97635418176651001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="36" name="Avenir-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="XhC-fc-cPv" firstAttribute="top" secondItem="qhE-83-z2k" secondAttribute="bottom" constant="-50" id="Dlm-xg-XXb"/>
+                            <constraint firstItem="JWn-T2-IFY" firstAttribute="top" secondItem="eGN-G0-3YP" secondAttribute="bottom" id="E4u-N1-jpZ"/>
+                            <constraint firstItem="YRO-VD-5Vh" firstAttribute="centerX" secondItem="k1R-6o-Q6r" secondAttribute="centerX" id="EGp-L9-gEv"/>
+                            <constraint firstItem="JWn-T2-IFY" firstAttribute="top" secondItem="jtN-rd-NIx" secondAttribute="bottom" id="FBZ-k4-sAW"/>
+                            <constraint firstItem="jtN-rd-NIx" firstAttribute="leading" secondItem="k1R-6o-Q6r" secondAttribute="leading" id="IAQ-iW-coi"/>
+                            <constraint firstAttribute="trailing" secondItem="eGN-G0-3YP" secondAttribute="trailing" id="Js3-NU-ZY5"/>
                             <constraint firstItem="JWn-T2-IFY" firstAttribute="top" secondItem="ooZ-Rf-HQf" secondAttribute="bottom" id="MdZ-Cp-mWh"/>
                             <constraint firstAttribute="trailing" secondItem="ooZ-Rf-HQf" secondAttribute="trailing" id="QeZ-Zp-J8a"/>
                             <constraint firstAttribute="trailing" secondItem="XhC-fc-cPv" secondAttribute="trailing" id="Qx9-EX-zNp"/>
                             <constraint firstAttribute="trailing" secondItem="qhE-83-z2k" secondAttribute="trailing" id="S75-8C-dam"/>
+                            <constraint firstItem="jtN-rd-NIx" firstAttribute="top" secondItem="HkW-p7-xWf" secondAttribute="bottom" id="dQv-1z-nlK"/>
+                            <constraint firstAttribute="trailing" secondItem="jtN-rd-NIx" secondAttribute="trailing" id="gKl-j5-wlE"/>
                             <constraint firstItem="ooZ-Rf-HQf" firstAttribute="leading" secondItem="k1R-6o-Q6r" secondAttribute="leading" id="h4u-k4-GjJ"/>
                             <constraint firstItem="qhE-83-z2k" firstAttribute="leading" secondItem="k1R-6o-Q6r" secondAttribute="leading" id="hpa-9d-q4V"/>
                             <constraint firstItem="XhC-fc-cPv" firstAttribute="leading" secondItem="k1R-6o-Q6r" secondAttribute="leading" id="nLG-Nm-Dbz"/>
+                            <constraint firstItem="eGN-G0-3YP" firstAttribute="top" secondItem="HkW-p7-xWf" secondAttribute="bottom" id="qf9-PO-WOh"/>
                             <constraint firstItem="qhE-83-z2k" firstAttribute="top" secondItem="HkW-p7-xWf" secondAttribute="bottom" id="rrU-ez-6TJ"/>
+                            <constraint firstItem="YRO-VD-5Vh" firstAttribute="centerY" secondItem="k1R-6o-Q6r" secondAttribute="centerY" id="wVW-oW-ZPy"/>
+                            <constraint firstItem="eGN-G0-3YP" firstAttribute="leading" secondItem="k1R-6o-Q6r" secondAttribute="leading" id="x4k-ji-Xi5"/>
                             <constraint firstItem="JWn-T2-IFY" firstAttribute="top" secondItem="XhC-fc-cPv" secondAttribute="bottom" id="y12-aZ-h0A"/>
                         </constraints>
                     </view>
@@ -200,6 +245,9 @@
                     </navigationItem>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="backgroundImage" destination="jtN-rd-NIx" id="xgR-tW-yRV"/>
+                        <outlet property="footerView" destination="ooZ-Rf-HQf" id="z1U-Mx-wHH"/>
+                        <outlet property="hintLabel" destination="YRO-VD-5Vh" id="7JU-i8-s2Q"/>
                         <outlet property="tabBar" destination="njS-AI-ZIs" id="91g-hf-cHY"/>
                         <outlet property="table" destination="XhC-fc-cPv" id="P70-nM-XqB"/>
                     </connections>
@@ -207,7 +255,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RCN-kn-iGo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="o0D-QL-QbF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1857" y="-609"/>
+            <point key="canvasLocation" x="1856.8" y="-609.44527736131943"/>
         </scene>
         <!--New event-->
         <scene sceneID="9gL-EY-7Gc">

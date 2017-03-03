@@ -31,7 +31,7 @@ class newEventVC: UITableViewController {
     
     @IBOutlet weak var selectedImageView: UIImageView!
     
-    var selectedImage: UIImage! = sampleImages[0]
+    var selectedImage: UIImage! = sampleImages[Int(arc4random_uniform(UInt32(sampleImages.count)))]
     
 
     @IBAction func cancel(_ sender: Any) {
@@ -58,7 +58,10 @@ class newEventVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let dest = segue.destination as? eventsViewController {
-            let eventDate = (sender as! Event).date
+            let event = sender as! Event
+            let eventDate = event.date
+            
+            dest.backgroundImage.image = event.bgImage
             
             if eventDate.timeIntervalSinceNow > 0 {
                 dest.tabBar.selectedItem = dest.tabBar.items?[0]

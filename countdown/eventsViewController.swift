@@ -14,18 +14,28 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet weak var table: UITableView!
 
+    @IBOutlet weak var footerView: UIVisualEffectView!
     @IBOutlet weak var tabBar: UITabBar!
     
-    var events: [Event] = []
+    @IBOutlet weak var backgroundImage: UIImageView!
+    
+    @IBOutlet weak var hintLabel: UILabel!
+    
+    var events: [Event] = [] {
+        didSet{
+            hintLabel.isHidden = !events.isEmpty
+        }
+    }
     var allevents: [Event] = []
 
-    let cellHeight = 100
+    let cellHeight = 120
 
 
     
     override func viewWillAppear(_ animated: Bool) {
         loadEvents()
         table.reloadData()
+//        backgroundImage.image =
     }
 
 
@@ -37,11 +47,12 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
         tabBar.selectedItem =  tabBar.items?[0]
         tabBar.delegate = self
         tabBar.layer.borderColor = UIColor.clear.cgColor
-        tabBar.layer.borderWidth = 0.5
+        tabBar.layer.borderWidth = 1
         tabBar.clipsToBounds = true
     }
     
     @IBAction func unwindToEventsVC(segue: UIStoryboardSegue){
+        
     }
     
     
@@ -100,7 +111,7 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
     
     
     override var prefersStatusBarHidden: Bool {
-        return true
+        return false
     }
     //MARK: tabBar
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
