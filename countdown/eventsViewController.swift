@@ -35,9 +35,10 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         loadEvents()
         table.reloadData()
-//        backgroundImage.image =
+        if !allevents.isEmpty {
+        backgroundImage.image = allevents.sorted(by: { $0.creationDate > $1.creationDate })[0].bgImage
+        }
     }
-
 
     override func viewDidLoad() {
         super.viewDidLoad()

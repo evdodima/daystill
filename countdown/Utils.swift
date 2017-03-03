@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 
-var imageNames:[String] = ["1","2","3","4","5","6","7"]
+var imageNames:[String] = ["1","2","3","5","6","7"]
 var sampleImages:[UIImage] = {
     var result:[UIImage] = []
     for name in imageNames {

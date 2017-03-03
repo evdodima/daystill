@@ -30,6 +30,9 @@ class EventTableViewCell: UITableViewCell {
 
             if interval == 0 {
                 interval = withEvent.date.timeIntervalSinceNow.minutes()
+                if interval == 0 {
+                    interval += 1
+                }
                 currency = (interval == 1) ? "Minute" : "Minutes"
             }
         }

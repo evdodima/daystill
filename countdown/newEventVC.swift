@@ -60,9 +60,7 @@ class newEventVC: UITableViewController {
         if let dest = segue.destination as? eventsViewController {
             let event = sender as! Event
             let eventDate = event.date
-            
-            dest.backgroundImage.image = event.bgImage
-            
+                        
             if eventDate.timeIntervalSinceNow > 0 {
                 dest.tabBar.selectedItem = dest.tabBar.items?[0]
             } else {
