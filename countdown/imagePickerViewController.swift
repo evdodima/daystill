@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class imagePickerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate,RSKImageCropViewControllerDataSource {
     
@@ -14,14 +15,18 @@ class imagePickerViewController: UIViewController, UITableViewDelegate, UITableV
 
     @IBOutlet weak var imagesTableView: UITableView!
     
+    @IBOutlet weak var addFromLibrary: UIButton!
+    
     var pickedImage: UIImage? = nil
     
+    
     @IBAction func addNewImage(_ sender: Any) {
-        imagePickerController.allowsEditing = false;
-        imagePickerController.delegate = self;
-        imagePickerController.sourceType = .photoLibrary;
-        present(imagePickerController, animated: true, completion: nil)
-        
+        PHPhotoLibrary.requestAuthorization { status in
+            self.imagePickerController.allowsEditing = false;
+            self.imagePickerController.delegate = self;
+            self.imagePickerController.sourceType = .photoLibrary;
+            self.present(self.imagePickerController, animated: true, completion: nil)
+        }
     }
 
     override func viewDidLoad() {
@@ -33,6 +38,17 @@ class imagePickerViewController: UIViewController, UITableViewDelegate, UITableV
 
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+//            switch PHPhotoLibrary.authorizationStatus() {
+//            case .denied,.restricted:
+//                self.addFromLibrary.isEnabled = false
+//                break
+//            default:
+//                self.addFromLibrary.isEnabled = true
+//                break
+//            }
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -105,7 +121,6 @@ class imagePickerViewController: UIViewController, UITableViewDelegate, UITableV
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = textColor
     }
-//
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? newEventVC {
             dest.selectedImage = pickedImage

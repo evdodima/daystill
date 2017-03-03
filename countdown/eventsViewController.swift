@@ -36,7 +36,9 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
         
         tabBar.selectedItem =  tabBar.items?[0]
         tabBar.delegate = self
-    
+        tabBar.layer.borderColor = UIColor.clear.cgColor
+        tabBar.layer.borderWidth = 0.5
+        tabBar.clipsToBounds = true
     }
     
     @IBAction func unwindToEventsVC(segue: UIStoryboardSegue){

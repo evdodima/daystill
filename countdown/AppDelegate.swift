@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 as? [UIImage]) {
             userImages = loadedImages
         }
+        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
         return true
     }
 
