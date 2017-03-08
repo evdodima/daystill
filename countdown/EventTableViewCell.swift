@@ -17,34 +17,46 @@ class EventTableViewCell: UITableViewCell {
     
     @IBOutlet weak var backgroundImage: UIImageView!
     var event: Event? = nil
+    var timer: Timer? = nil
     
     func updateCell(withEvent: Event){
         self.event = withEvent
         backgroundImage.image = nil
         backgroundImage.image = withEvent.bgImage
-        var interval = withEvent.date.timeIntervalSinceNow.days()
+        updateLabels()
+        
+        if timer == nil {
+           timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateLabels), userInfo: nil, repeats: true)
+            timer!.fire()
+        }
+        
+    }
+    
+    func updateLabels(){
+        var interval = event!.date.timeIntervalSinceNow.days()
         var currency = (interval == 1) ? "Day" : "Days"
         if interval == 0 {
-            interval = withEvent.date.timeIntervalSinceNow.hours()
+            interval = event!.date.timeIntervalSinceNow.hours()
             currency = (interval == 1) ? "Hour" : "Hours"
-
             if interval == 0 {
-                interval = withEvent.date.timeIntervalSinceNow.minutes()
-                if interval == 0 {
-                    interval += 1
-                }
+                interval = event!.date.timeIntervalSinceNow.minutes()
                 currency = (interval == 1) ? "Minute" : "Minutes"
+                if interval == 0 {
+                    interval = event!.date.timeIntervalSinceNow.seconds()
+                    currency = (interval == 1) ? "Second" : "Seconds"
+                }
+                
             }
         }
         interval = abs(interval)
         
-        if withEvent.date > Date() {
+        if event!.date > Date() {
             counterTextLabel.text = currency + " untill"
         } else {
             counterTextLabel.text = currency + " since"
         }
         counterLabel.text = String(interval)
-        eventNameLabel.text = withEvent.name
-        eventDateLabel.text = withEvent.date.asString()
+        eventNameLabel.text = event!.name
+        eventDateLabel.text = event!.date.asString()
     }
 }

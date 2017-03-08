@@ -59,6 +59,12 @@ class imagePickerViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = textColor
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return userImages.isEmpty ? 1 : 2
     }
@@ -117,9 +123,10 @@ class imagePickerViewController: UIViewController, UITableViewDelegate, UITableV
         return 32
     }
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = textColor
+
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return (self.view.frame.height * 0.15 + 20)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? newEventVC {
@@ -157,7 +164,7 @@ class imagePickerViewController: UIViewController, UITableViewDelegate, UITableV
     func imageCropViewControllerCustomMaskRect(_ controller: RSKImageCropViewController) -> CGRect {
         var maskRect : CGRect
         
-        let maskHeight = CGFloat(120.0)
+        let maskHeight = CGFloat(self.view.frame.height * 0.15 + 20)
         
         let viewWidth = controller.view.frame.width
         let viewHeight = controller.view.frame.height

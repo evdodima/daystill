@@ -11,7 +11,8 @@ import CoreData
 import UIKit
 
 
-var imageNames:[String] = ["1","2","3","5","6","7"]
+let defaults = UserDefaults.standard
+var imageNames:[String] = ["1","christmas","3","4","2","lights","5","6","7","9","10","11"]
 var sampleImages:[UIImage] = {
     var result:[UIImage] = []
     for name in imageNames {
@@ -40,6 +41,22 @@ var imagesFilePath : String {
     return (url?.appendingPathComponent("userImages").path)!
 }
 
+func removeNotification(forEvent event: Event){
+    guard (UIApplication.shared.scheduledLocalNotifications) != nil else {
+        return
+    }
+    
+    let notifications = UIApplication.shared.scheduledLocalNotifications!
+    
+    for n in notifications {
+        if ((n.userInfo!["creationDate"] as! Date).compare(event.creationDate).rawValue == 0) {
+            UIApplication.shared.cancelLocalNotification(n)
+            print("canceled \(UIApplication.shared.scheduledLocalNotifications!.count)")
+            return
+        }
+    }
+}
+
 extension UIButton {
     func setBackgroundColor(color: UIColor, forState: UIControlState) {
         UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
@@ -61,6 +78,10 @@ extension TimeInterval {
     func minutes() -> Int{
         return Int(self / 60 )
     }
+    func seconds() -> Int{
+        return Int(self)
+    }
+
 }
 
 extension Date {

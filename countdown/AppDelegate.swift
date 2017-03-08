@@ -15,12 +15,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
+        if (!defaults.bool(forKey: "executedOnce")) {
+                UIApplication.shared.cancelAllLocalNotifications()
+            defaults.set(true, forKey:"executedOnce")
+        }
         if let loadedImages =
             (NSKeyedUnarchiver.unarchiveObject(withFile: imagesFilePath)
                 as? [UIImage]) {
             userImages = loadedImages
         }
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
+        
+        application.statusBarStyle = .lightContent
+                
         return true
     }
 

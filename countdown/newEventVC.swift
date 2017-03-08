@@ -16,9 +16,9 @@ class newEventVC: UITableViewController {
     
     let pickersDateSectionIndex = 1
     let startPickerIndex = 1
-    let datePickerCellHeight = 216;
+    let datePickerCellHeight = 170;
     
-    let imageCellHeight = 100
+    let imageCellHeight = 120
     
     var event: Event? = nil
     var events: [Event]? = nil
@@ -113,15 +113,25 @@ class newEventVC: UITableViewController {
     
     func saveEvent(event : Event){
         
+        let notification = UILocalNotification()
+        notification.alertBody = "'\(event.name)' is happening now!"
+        notification.alertAction = "open"
+        notification.fireDate = event.date
+        notification.userInfo = ["creationDate": event.creationDate]
+
         if self.event != nil {
-            events![events!.index(of: event)!] = event
-            
+            let ind = events!.index(of: self.event!)!
+            removeNotification(forEvent: events![ind])            
         } else {
             events!.append(event)
         }
+        UIApplication.shared.scheduleLocalNotification(notification)
+        print("added \(UIApplication.shared.scheduledLocalNotifications!.count)")
+
         NSKeyedArchiver.archiveRootObject(events!, toFile: filePath)
         self.event = nil
     }
+    
     
     
     override func viewDidLoad() {
@@ -139,6 +149,31 @@ class newEventVC: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         selectedImageView.image = selectedImage
+        
+        let bounds = self.navigationController?.navigationBar.bounds as CGRect!
+        
+        let fullBounds = CGRect(x:0,y:-20, width: bounds!.width, height: 64)
+        
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        visualEffectView.frame = fullBounds
+        
+        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "clear"), for: .default)
+
+        self.navigationController?.navigationBar.addSubview(visualEffectView)
+        self.navigationController?.navigationBar.sendSubview(toBack: visualEffectView)
+        
+        
+        let imageView = UIImageView(image: selectedImage)
+        imageView.contentMode = .scaleAspectFill
+        self.tableView.backgroundView = imageView
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        
+        blurView.frame = imageView.bounds
+        imageView.addSubview(blurView)
+        
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -146,15 +181,17 @@ class newEventVC: UITableViewController {
     }
     
     
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height = self.tableView.rowHeight;
         
         if (indexPath.section == pickersDateSectionIndex && indexPath.row == startPickerIndex) {
-            height = CGFloat((self.startPicker.isHidden) ? 0 : datePickerCellHeight);
+            height = CGFloat((self.startPicker.isHidden) ? 0 :        CGFloat(self.view.frame.height * 0.27)
+);
         }
         
         if  (indexPath.section == 2) {
-            height = CGFloat(imageCellHeight)
+            height = CGFloat(self.view.frame.height * 0.15 + 20)
         }
         
         return height;
@@ -178,6 +215,10 @@ class newEventVC: UITableViewController {
             }
         }
 
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
     }
     
     func showCell(forDatePicker: UIDatePicker){
@@ -207,4 +248,6 @@ class newEventVC: UITableViewController {
     func hideKeyboard(){
         nameField.resignFirstResponder()
     }
+    
+
 }

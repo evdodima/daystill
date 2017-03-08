@@ -30,7 +30,6 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
 
     let cellHeight = 120
 
-
     
     override func viewWillAppear(_ animated: Bool) {
         loadEvents()
@@ -42,7 +41,7 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        table.contentInset = UIEdgeInsetsMake(50, 0, 50, 0)
+        table.contentInset = UIEdgeInsetsMake(70, 0, 50, 0)
         table.tableFooterView = UIView()
         
         tabBar.selectedItem =  tabBar.items?[0]
@@ -96,7 +95,7 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        return CGFloat(cellHeight)
+        return CGFloat(self.view.frame.height * 0.15 + 20)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -143,6 +142,7 @@ class eventsViewController:  UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func removeEvent(index:Int){
+            removeNotification(forEvent: allevents[index])
             allevents.remove(at: index)
             NSKeyedArchiver.archiveRootObject(allevents, toFile: filePath)
         loadEvents()
