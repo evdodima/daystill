@@ -20,7 +20,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5" translatesAutoresizingMaskIntoConstraints="NO" id="lBl-Yn-aOl">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="10" translatesAutoresizingMaskIntoConstraints="NO" id="lBl-Yn-aOl">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FV8-kN-GVs">
@@ -28,20 +28,6 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="0lD-gG-8mT">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchScreenImage" translatesAutoresizingMaskIntoConstraints="NO" id="jbi-Lp-Igi">
-                                            <rect key="frame" x="0.0" y="288" width="375" height="91"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="91" id="9oz-HL-03U"/>
-                                            </constraints>
-                                        </imageView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="jbi-Lp-Igi" secondAttribute="trailing" id="5Um-Ws-ln7"/>
-                                        <constraint firstItem="jbi-Lp-Igi" firstAttribute="leading" secondItem="0lD-gG-8mT" secondAttribute="leading" id="8EY-eY-k28"/>
-                                        <constraint firstItem="jbi-Lp-Igi" firstAttribute="centerY" secondItem="0lD-gG-8mT" secondAttribute="centerY" id="DIx-xS-tJZ"/>
-                                        <constraint firstItem="jbi-Lp-Igi" firstAttribute="centerX" secondItem="0lD-gG-8mT" secondAttribute="centerX" id="zjm-TE-UOj"/>
-                                    </constraints>
                                 </view>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
@@ -65,7 +51,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="5" width="2048" height="2048"/>
-        <image name="launchScreenImage" width="512" height="512"/>
+        <image name="10" width="730" height="1071"/>
     </resources>
 </document>
